@@ -1,0 +1,298 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: transparent;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: transparent !important;
+  overflow: hidden;
+  display: flex;
+  place-items: center;
+  justify-content: center;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Base styles for the main container */
+.container {
+  margin: 0 auto;
+  padding: 2.5rem;
+  text-align: center;
+  max-width: 440px;
+  background-color: #242424;
+  border-radius: 24px;
+}
+
+h1 {
+  font-size: 2.8em;
+  line-height: 1.1;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #646cff, #3b82f6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.description {
+  color: #888;
+  font-size: 1.1em;
+  margin-bottom: 1rem;
+}
+
+.shortcut-hint {
+  font-size: 0.9em;
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+.shortcut-hint code {
+  background: #333;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+}
+
+/* Card and Recording Controls */
+.card {
+  background: #2a2a2a;
+  padding: 2.5rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  border: 1px solid #3a3a3a;
+  transition: transform 0.2s ease;
+}
+
+.status-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  margin-bottom: 2rem;
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #ccc;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  background-color: #555;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.dot.active {
+  background-color: #ef4444;
+  box-shadow: 0 0 12px #ef4444;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+button {
+  border-radius: 12px;
+  border: none;
+  padding: 0.8rem 1.8rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+}
+
+.start-btn {
+  background-color: #646cff;
+  color: white;
+}
+
+.start-btn:hover {
+  background-color: #535bf2;
+  transform: translateY(-2px);
+}
+
+.stop-btn {
+  background-color: #ef4444;
+  color: white;
+}
+
+.stop-btn:hover {
+  background-color: #dc2626;
+  transform: translateY(-2px);
+}
+
+/* File info box */
+.file-info {
+  margin-top: 2rem;
+  background: #1a1a1a;
+  padding: 1.5rem;
+  border-radius: 12px;
+  border-left: 4px solid #646cff;
+  text-align: left;
+}
+
+.label {
+  font-size: 0.8rem;
+  color: #646cff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.path {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.85rem;
+  color: #999;
+  word-break: break-all;
+}
+
+.error-box {
+  margin-top: 1rem;
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+  padding: 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+
+.info-footer {
+  margin-top: 3rem;
+  font-size: 0.8rem;
+  color: #555;
+}
+
+.info-footer p {
+  margin: 0.2rem 0;
+}
+
+.fade-in {
+  animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Modern Rounded Overlay Styles */
+.handy-overlay {
+  width: 480px;
+  background: rgba(18, 18, 20, 0.9);
+  border-radius: 32px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(25px);
+  overflow: hidden;
+  animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: grab;
+  padding: 24px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.handy-overlay:active {
+  cursor: grabbing;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px) scale(0.95); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.overlay-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.visualization {
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 0 4px;
+}
+
+.visualization .bar {
+  width: 2px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 4px;
+  min-height: 3px;
+  transition: height 0.05s ease, background 0.2s ease;
+}
+
+.overlay-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 4px;
+}
+
+.footer-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.meeting-icon {
+  font-size: 16px;
+  opacity: 0.8;
+}
+
+.footer-right {
+  display: flex;
+  gap: 20px;
+}
+
+.shortcut-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.action-label {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.4);
+  font-weight: 500;
+}
+
+kbd {
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.9);
+  border-radius: 6px;
+  padding: 4px 8px;
+  font-size: 12px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-weight: 600;
+  min-width: 18px;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+kbd.esc {
+  font-size: 11px;
+  padding: 3px 6px;
+}
