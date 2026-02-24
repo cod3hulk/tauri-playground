@@ -1,0 +1,38 @@
+:root,
+html,
+body,
+#root,
+.container {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: transparent !important;
+  background: transparent !important;
+  overflow: hidden;
+  display: flex;
+  place-items: center;
+  justify-content: center;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.pill {
+  background: rgba(30, 30, 30, 0.9);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border-radius: 45px;
+  width: 560px;
+  height: 70px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  cursor: grab;
+}
+
+.pill:active {
+  cursor: grabbing;
+}
