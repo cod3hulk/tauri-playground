@@ -122,6 +122,7 @@ const WaveformVisualization: React.FC<WaveformVisualizationProps> = ({ isRecordi
       ref={canvasRef}
       width={540}
       height={54}
+      data-tauri-drag-region
       style={{
         width: '100%',
         height: '54px',
