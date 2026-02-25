@@ -383,6 +383,48 @@ async fn stop_recording(state: State<'_, AppState>) -> Result<String, String> {
     stop_recording_inner(state.0.clone()).await
 }
 
+async fn cancel_recording_inner(recorder_arc: Arc<Mutex<SharedRecorder>>) -> Result<(), String> {
+    let file_path = {
+        let mut recorder = recorder_arc.lock();
+
+        if let Some(stream) = recorder.system_stream.take() {
+            let _ = stream.stop_capture();
+        }
+        if let Some(stream) = recorder.mic_stream.take() {
+            let _ = stream.pause();
+        }
+        if let Some(writer_arc) = recorder.writer.take() {
+            let mut writer_lock = writer_arc.lock();
+            if let Some(writer) = writer_lock.take() {
+                let _ = writer.finalize();
+            }
+        }
+
+        recorder.system_buffer.lock().clear();
+        recorder.mic_buffer.lock().clear();
+        *recorder.system_level.lock() = 0.0;
+        *recorder.mic_level.lock() = 0.0;
+
+        recorder.file_path.take()
+    };
+
+    if let Some(path) = file_path {
+        let _ = std::fs::remove_file(path);
+    }
+
+    Ok(())
+}
+
+#[tauri::command]
+async fn cancel_recording(app: AppHandle, state: State<'_, AppState>) -> Result<(), String> {
+    cancel_recording_inner(state.0.clone()).await?;
+    let _ = app.emit("recording-state", serde_json::json!({"recording": false}));
+    if let Some(window) = app.get_webview_window("main") {
+        let _ = window.hide();
+    }
+    Ok(())
+}
+
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
@@ -429,7 +471,7 @@ pub fn run() {
             )?;
             Ok(())
         })
-        .invoke_handler(tauri::generate_handler![start_recording, stop_recording])
+        .invoke_handler(tauri::generate_handler![start_recording, stop_recording, cancel_recording])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

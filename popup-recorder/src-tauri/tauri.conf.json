@@ -15,7 +15,7 @@
       {
         "title": "popup-recorder",
         "width": 580,
-        "height": 90,
+        "height": 130,
         "decorations": false,
         "transparent": true,
         "shadow": false,
